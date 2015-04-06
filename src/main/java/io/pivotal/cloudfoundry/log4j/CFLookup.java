@@ -1,5 +1,7 @@
 package io.pivotal.cloudfoundry.log4j;
 
+import io.pivotal.cloudfoundry.JacksonCFVcapApplicationParser;
+
 import org.apache.logging.log4j.core.LogEvent;
 import org.apache.logging.log4j.core.config.plugins.Plugin;
 import org.apache.logging.log4j.core.lookup.StrLookup;
@@ -11,14 +13,23 @@ import org.apache.logging.log4j.core.lookup.StrLookup;
  * @author dmalone <dmalone@pivotal.io>
  *
  */
-@Plugin(name = "cf", category = "Lookup")
+@Plugin(name = "cf", category = StrLookup.CATEGORY)
 public class CFLookup implements StrLookup{
 
+	private final JacksonCFVcapApplicationParser vcapApplicationParser;
+	
 	public CFLookup(){
+		this.vcapApplicationParser = JacksonCFVcapApplicationParser.getInstance();
 	}
 	
 	public String lookup(String key) {
-		return CFVcapApplication.getInstance().lookup(key);
+		if("appName".equalsIgnoreCase(key)){
+			return vcapApplicationParser.getAppName();
+		}else if("spaceName".equalsIgnoreCase(key)){
+			return vcapApplicationParser.getSpaceName();
+		}else{
+			return String.format("[Unknown key: %s]", key);
+		}
 	}
 
 	public String lookup(LogEvent event, String key) {
