@@ -15,7 +15,6 @@ import org.apache.logging.log4j.core.lookup.StrLookup;
 public class CFLookup implements StrLookup{
 
 	public CFLookup(){
-		System.out.println("Initializing CFLookup plugin");
 	}
 	
 	public String lookup(String key) {
