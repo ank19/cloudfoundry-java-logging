@@ -22,11 +22,11 @@ an example:
 ```xml
 <Appenders>
   <Console name="console" target="SYSTEM_OUT">
-    <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level [CF-AppName:${cf:appName} CF-SpaceName:${cf:spaceName}] %c{1}:%L - %m%n"/>
+    <PatternLayout pattern="[%d{ISO8601}] [${cf:space_name}]/[${cf:application_name}]/[${cf:instance_index}] [${cf:instance_id}]/[$${env:CF_INSTANCE_IP}]/[$${env:PORT}] [%-5p] [%t] [%c] - [%m\n]"/>
   </Console>
 </Appenders>
 ```
 
-Currently, the only supported placeholders are `${cf:appName}` and `${cf:spaceName}`.
+
 
 

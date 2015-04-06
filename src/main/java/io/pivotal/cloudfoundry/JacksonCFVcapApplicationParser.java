@@ -1,5 +1,6 @@
 package io.pivotal.cloudfoundry;
 
+import java.util.Collections;
 import java.util.Map;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -14,21 +15,22 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class JacksonCFVcapApplicationParser {
 
 	private static final JacksonCFVcapApplicationParser instance = new JacksonCFVcapApplicationParser();
-
-	private final String appName;
-	private final String spaceName;
+	
+	Map<String, Object> vcapAppData  = Collections.EMPTY_MAP;
 	
 	private JacksonCFVcapApplicationParser(){
+		
 		final String vcapAppEnvVar = Environment.getEnvironmentVariable("VCAP_APPLICATION");
 		
 		try {
-			final ObjectMapper objectMapper = new ObjectMapper();
-			Map<String,Object> vcapAppData = objectMapper.readValue(vcapAppEnvVar, Map.class);
-			
-			appName = (String) vcapAppData.get("application_name");
-			spaceName = (String) vcapAppData.get("space_name");
+		
+			if (null != vcapAppEnvVar){
+				final ObjectMapper objectMapper = new ObjectMapper();
+				vcapAppData = objectMapper.readValue(vcapAppEnvVar, Map.class);
+				
+			}
 		} catch (Exception e) {
-			throw new IllegalStateException("Unble to parse VCAP_APPLICATION environment variable; VCAP_APPLICATION=" + vcapAppEnvVar, e);
+			throw new IllegalStateException("Unable to parse VCAP_APPLICATION environment variable; VCAP_APPLICATION=" + vcapAppEnvVar, e);
 		}
 	}
 
@@ -37,13 +39,9 @@ public class JacksonCFVcapApplicationParser {
 		return instance;
 	}
 
-	public String getAppName() {
-		return appName;
-	}
-
-	public String getSpaceName() {
-		return spaceName;
-	}
 	
+	public String lookup(String key){
+		return String.valueOf(vcapAppData.get(key)) ;
+	}
 	
 }

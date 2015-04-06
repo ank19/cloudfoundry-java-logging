@@ -23,13 +23,13 @@ public class CFLookup implements StrLookup{
 	}
 	
 	public String lookup(String key) {
-		if("appName".equalsIgnoreCase(key)){
-			return vcapApplicationParser.getAppName();
-		}else if("spaceName".equalsIgnoreCase(key)){
-			return vcapApplicationParser.getSpaceName();
-		}else{
-			return String.format("[Unknown key: %s]", key);
+		
+		String value = vcapApplicationParser.lookup(key);
+		if(null == value){
+			value = String.format("[Unknown key: %s]", key);
 		}
+		
+		return value;
 	}
 
 	public String lookup(LogEvent event, String key) {
