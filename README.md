@@ -27,6 +27,11 @@ an example:
 </Appenders>
 ```
 
+Log Messages will look like this 
+```bash
+2015-04-06T19:20:16.36-0400 [App/0]   OUT ][2015-04-06T23:20:16,362] [development]/[logproducer]/[0] [91c1dea7408149ba902a48cf4ac51211]/[10.10.81.42]/[63870] [DEBUG] [pool-3-thread-20] [com.twa.logging.service.LogProducer] - [{} logging logging logging... keep those apps a logging... logging logging logging, RAWHIDE!
+```
+
 
 
 
