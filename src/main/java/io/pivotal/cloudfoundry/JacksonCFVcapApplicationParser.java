@@ -18,8 +18,8 @@ public class JacksonCFVcapApplicationParser {
 	private final String appName;
 	private final String spaceName;
 	
-	public JacksonCFVcapApplicationParser(Environment environment){
-		final String vcapAppEnvVar = environment.getEnvironmentVariable("VCAP_APPLICATION");
+	private JacksonCFVcapApplicationParser(){
+		final String vcapAppEnvVar = Environment.getEnvironmentVariable("VCAP_APPLICATION");
 		
 		try {
 			final ObjectMapper objectMapper = new ObjectMapper();
@@ -31,10 +31,7 @@ public class JacksonCFVcapApplicationParser {
 			throw new IllegalStateException("Unble to parse VCAP_APPLICATION environment variable; VCAP_APPLICATION=" + vcapAppEnvVar, e);
 		}
 	}
-	
-	private JacksonCFVcapApplicationParser(){
-		this(new Environment());
-	}
+
 	
 	public static JacksonCFVcapApplicationParser getInstance(){
 		return instance;
