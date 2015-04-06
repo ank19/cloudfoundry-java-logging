@@ -2,7 +2,7 @@
 <Configuration status="WARN" packages="io.pivotal.cloudfoundry.log4j">
     <Appenders>
         <Console name="console" target="SYSTEM_OUT">
-            <PatternLayout pattern="${cf:appName} ${cf:blahblah} ${cf:spaceName}"/>
+            <PatternLayout pattern=" %5p [CF-AppName:${cf:appName} CF-SpaceName:${cf:spaceName}] %c{1}:%L - %m%n"/>
         </Console>
     </Appenders>
     <Loggers>
