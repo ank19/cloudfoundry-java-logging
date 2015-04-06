@@ -8,8 +8,7 @@ A full list of Cloud Foundry environment variables can be found [here](http://do
 
 ## log4j
 Currently only supports log4j v2. This library uses [log4j's plugin extension point](https://logging.apache.org/log4j/2.x/manual/plugins.html) 
-to allow you to use this library as a plug and play extension within your application while maintaining external patterns 
-with PatternLayout.
+to allow you to use it as a plug and play extension within your application while maintaining external pattern configurations with PatternLayout.
 
 To use this library, add the following to your log4j2.xml file's Configuration element:
 
