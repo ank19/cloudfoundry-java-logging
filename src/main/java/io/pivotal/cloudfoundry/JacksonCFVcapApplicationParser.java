@@ -3,6 +3,7 @@ package io.pivotal.cloudfoundry;
 import java.util.Collections;
 import java.util.Map;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
@@ -26,9 +27,9 @@ public class JacksonCFVcapApplicationParser {
 		
 			if (null != vcapAppEnvVar){
 				final ObjectMapper objectMapper = new ObjectMapper();
-				vcapAppData = objectMapper.readValue(vcapAppEnvVar, Map.class);
-				
+				vcapAppData = objectMapper.readValue(vcapAppEnvVar, new TypeReference<Map<String, Object>>() {});
 			}
+			
 		} catch (Exception e) {
 			throw new IllegalStateException("Unable to parse VCAP_APPLICATION environment variable; VCAP_APPLICATION=" + vcapAppEnvVar, e);
 		}
@@ -41,7 +42,7 @@ public class JacksonCFVcapApplicationParser {
 
 	
 	public String lookup(String key){
-		return String.valueOf(vcapAppData.get(key)) ;
+		return !vcapAppData.containsKey(key)?null:String.valueOf(vcapAppData.get(key));
 	}
 	
 }

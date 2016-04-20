@@ -39,7 +39,7 @@ public class StringAppender extends AbstractOutputStreamAppender<StringAppender.
 		if (nullablePatternString == null) {
 			layout = PatternLayout.createDefaultLayout();
 		} else {
-			layout = PatternLayout.createLayout(nullablePatternString,
+			layout = PatternLayout.createLayout(nullablePatternString,null,
 					configuration, null, null, true, false, null, null);
 		}
 
@@ -75,7 +75,7 @@ public class StringAppender extends AbstractOutputStreamAppender<StringAppender.
 
 		protected StringOutputStreamManager(ByteArrayOutputStream os,
 				String streamName, Layout<?> layout) {
-			super(os, streamName, layout);
+			super(os, streamName, layout, true);
 			stream = os;
 		}
 

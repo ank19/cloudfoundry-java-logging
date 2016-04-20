@@ -31,7 +31,7 @@ public class CFLookupTest {
 
 	@Test
 	public void testLookupStringWithKnownKeyReturnsCorrectValue() {
-		String result = lookup.lookup("appName");
+		String result = lookup.lookup("application_name");
 		assertNotNull(result);
 		assertEquals("logproducer", result);
 	}

@@ -28,7 +28,7 @@ public class CFLookup implements StrLookup{
 		if(null == value){
 			value = String.format("[Unknown key: %s]", key);
 		}
-		
+		 
 		return value;
 	}
 
